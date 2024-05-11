@@ -1,0 +1,18 @@
+Scoring:
+  # Bombs Remove this many points.
+  MineRevealPunishment: 400
+  # Cells grant this many points.
+  CellRevealReward: 1
+
+Performance:
+  # Number of cells that can open per tick.
+  CellPopLimit: 20
+  ClickRange: 10
+
+Visual:
+  BlockDisplayInterpolationDuration: 1
+  BlockDisplayInterpolationDelay: 1
+
+Generation:
+  VanillaBombChance: 19
+  ChocoBombChance: 31

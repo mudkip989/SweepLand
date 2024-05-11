@@ -1,0 +1,11 @@
+name: SweepLand
+version: '${version}'
+main: me.mudkip989.plugin.sweepland.SweepLand
+load: STARTUP
+api-version: '1.20'
+commands:
+  sweepland:
+    usage: /<command>
+    description: Empty Text.
+    aliases: [sl]
+
