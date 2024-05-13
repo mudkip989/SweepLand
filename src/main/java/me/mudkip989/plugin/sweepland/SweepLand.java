@@ -125,12 +125,14 @@ public final class SweepLand extends JavaPlugin {
                         SweepingActions.AnimateOpenCell(SweepLand.world.getType(loc), loc, world);
                         if (world.getType(bloc).equals(Bombs.get(0))) {
                             //Is not Bomb
-                            world.playSound(floc, Sound.ENTITY_ITEM_PICKUP, 1, 1);
-                            int bombres = SweepingActions.scanPattern(pattern, bloc, world, Bombs);
-                            Material res;
                             if(cel.biome.extraPatterns) {
                                 pattern = Patterns.get(PatternSaps.get(Bombs.indexOf(world.getType(bloc.clone().add(0, -1, 0)))));
                             }
+
+                            world.playSound(floc, Sound.ENTITY_ITEM_PICKUP, 10, (-(3f/(2f*((cel.streak/20f)+1)))+2));
+                            int bombres = SweepingActions.scanPattern(pattern, bloc, world, Bombs);
+                            Material res;
+
                             switch(cel.biome.numberLogic){
                                 case Normal -> res = Logics.NumberNormal(bloc, cel.biome, pattern);
                                 case Inverted -> res = Logics.NumberInverted(bloc, cel.biome, pattern);
@@ -158,7 +160,7 @@ public final class SweepLand extends JavaPlugin {
                                     tfloc.add(0, 3, 0);
                                     if (SweepingActions.isClosedCell(tnloc) && SweepLand.world.getType(tfloc) != Material.FIRE_CORAL_FAN) {
                                         Location tloc = tnloc.clone();
-                                        CellQueue.add(new CellOpenData(tnloc, cel.uuid, Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z()))));
+                                        CellQueue.add(new CellOpenData(tnloc, cel.uuid, Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z())), cel.streak + 1));
                                     }
 
 
@@ -301,14 +303,14 @@ public final class SweepLand extends JavaPlugin {
     private static void SetNoise() {
 
         BiomeNoise.SetNoiseType(FastNoiseLite.NoiseType.Cellular);
-        BiomeNoise.SetFrequency(0.025f);
+        BiomeNoise.SetFrequency(0.01f);
         BiomeNoise.SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction.EuclideanSq);
         BiomeNoise.SetCellularReturnType(FastNoiseLite.CellularReturnType.CellValue);
         BiomeNoise.SetCellularJitter(1.25f);
         BiomeDomainWarp.SetFractalType(FastNoiseLite.FractalType.DomainWarpIndependent);
         BiomeDomainWarp.SetDomainWarpType(FastNoiseLite.DomainWarpType.OpenSimplex2);
         BiomeDomainWarp.SetDomainWarpAmp(30f);
-        BiomeDomainWarp.SetFrequency(0.017f);
+        BiomeDomainWarp.SetFrequency(0.02f);
         BiomeDomainWarp.SetFractalOctaves(9);
         BiomeDomainWarp.SetFractalLacunarity(1f);
         BiomeDomainWarp.SetFractalGain(25f);

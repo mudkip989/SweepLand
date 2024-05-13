@@ -10,9 +10,12 @@ public class CellOpenData {
     public UUID uuid;
     public Biome biome;
 
-    public CellOpenData(Location loc, UUID uuid, Biome biome){
+    public int streak;
+
+    public CellOpenData(Location loc, UUID uuid, Biome biome, int streak){
         this.location = loc;
         this.uuid = uuid;
         this.biome = biome;
+        this.streak = streak;
     }
 }

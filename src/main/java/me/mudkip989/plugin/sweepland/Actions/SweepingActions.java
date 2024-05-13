@@ -1,5 +1,6 @@
 package me.mudkip989.plugin.sweepland.Actions;
 
+import com.destroystokyo.paper.*;
 import me.mudkip989.plugin.sweepland.*;
 import me.mudkip989.plugin.sweepland.DataTypes.*;
 import org.bukkit.*;
@@ -26,7 +27,16 @@ public class SweepingActions {
         if(loc != null) {
             if (isClosedCell(loc)) {
                 Location tloc = loc.clone().toBlockLocation();
-                SweepLand.FlagQueue.add(new CellOpenData(loc, e.getPlayer().getUniqueId(), Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z()))));
+                SweepLand.FlagQueue.add(new CellOpenData(loc, e.getPlayer().getUniqueId(), Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z())), 0));
+            }else if(Numbers.contains(world.getType(loc))){
+                Location floc = loc.clone().add(0.5, 1.5, 0.5);
+                List<Vector> pattern = Patterns.get(world.getType(floc));
+                for (Vector p : pattern){
+                    e.getPlayer().spawnParticle(Particle.END_ROD, floc.clone().add(p), 5, 0, 0, 0, 0);
+
+                }
+
+
             }
         }
 
@@ -42,7 +52,7 @@ public class SweepingActions {
             floc.add(0, 1, 0);
             if ((((SweepingActions.isClosedCell(loc) && world.getType(floc) != Material.FIRE_CORAL_FAN)) || SweepLand.Numbers.contains(world.getType(loc)))) {
                 Location tloc = loc.clone().toBlockLocation();
-                SweepLand.CellQueue.add(new CellOpenData(loc, e.getPlayer().getUniqueId(), Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z()))));
+                SweepLand.CellQueue.add(new CellOpenData(loc, e.getPlayer().getUniqueId(), Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z())), 0));
             }
             if(SurfaceBombs.contains(world.getType(loc))){
                 Predicate<Player> nearPlayers = player -> (player.getLocation().distance(loc)<10);

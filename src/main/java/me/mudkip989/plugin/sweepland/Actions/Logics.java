@@ -54,7 +54,7 @@ public class Logics {
                 Location tfloc = tloc.clone();
                 tfloc.add(0, 1, 0);
                 if(SweepingActions.isClosedCell(tloc) && world.getType(tfloc).equals(Flags.get(0))){
-                    CellQueue.add(new CellOpenData(tloc, uuid, Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z()))));
+                    CellQueue.add(new CellOpenData(tloc, uuid, Biome.GetBiomeAtLocation(new FastNoiseLite.Vector2((int)tloc.x(), (int)tloc.z())), 0));
                 }
             }
         }

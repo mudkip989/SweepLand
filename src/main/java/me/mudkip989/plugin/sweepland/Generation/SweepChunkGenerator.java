@@ -35,7 +35,9 @@ public class SweepChunkGenerator extends ChunkGenerator {
                 chunkData.setBlock(x, 68, z, bombmat);
                 chunkData.setBlock(x, 69, z, biome.underBlock);
                 chunkData.setBlock(x, 70, z, biome.closedCellMat);
-                chunkData.setBlock(x, 67, z, SweepLand.Bombs.get(random.nextInt(0, 5)));
+                List<Material> temp = new ArrayList<>(SweepLand.Bombs);
+                temp.addAll(List.of(Material.STONE,Material.STONE,Material.STONE,Material.STONE,Material.STONE));
+                chunkData.setBlock(x, 67, z, temp.get(random.nextInt(0, temp.size())));
             }
         }
     }
