@@ -43,7 +43,7 @@ public class SweepEvents implements Listener {
     }
     @EventHandler
     public void WorldLoad(WorldLoadEvent e){
-        world = Bukkit.getWorld("world");
+        world = Bukkit.getServer().getWorld("world");
         world.setGameRule(GameRule.DO_MOB_SPAWNING, false);
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         world.setGameRule(GameRule.DO_FIRE_TICK, false);

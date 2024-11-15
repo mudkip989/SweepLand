@@ -16,7 +16,9 @@ public class Biome {
 
     public Boolean extraPatterns;
 
-    public Biome(String name, Material mat1, Material mat2, MinePlacement mines, NumberLogic numb, int chance, boolean extraPatterns){
+    public int multiplier;
+
+    public Biome(String name, Material mat1, Material mat2, MinePlacement mines, NumberLogic numb, int chance, boolean extraPatterns, int multiplier){
         this.closedCellMat = mat1;
         this.underBlock = mat2;
         this.minePlacement = mines;
@@ -24,6 +26,7 @@ public class Biome {
         this.BombChance = chance;
         this.extraPatterns = extraPatterns;
         this.name = name;
+        this.multiplier = multiplier;
     }
 
     public static Biome GetBiomeAtLocation(FastNoiseLite.Vector2 vec, FastNoiseLite n, FastNoiseLite dw){

@@ -150,7 +150,7 @@ public final class SweepLand extends JavaPlugin {
 
 
                             Score score = Objective.getScore(Bukkit.getOfflinePlayer(cel.uuid));
-                            score.setScore(score.getScore()+CellScore);
+                            score.setScore(score.getScore()+(CellScore * cel.biome.multiplier));
                             if (bombres == 0) {
                                 //Auto Open 0
                                 for (Vector v : pattern) {
@@ -170,7 +170,7 @@ public final class SweepLand extends JavaPlugin {
                             //Is Bomb
                             world.getBlockAt(loc).setType(SurfaceBombs.get(Bombs.indexOf(world.getType(bloc))), false);
                             Score score = Objective.getScore(Bukkit.getOfflinePlayer(cel.uuid));
-                            score.setScore(score.getScore()-(BombPunish*Bombs.indexOf(world.getType(bloc))));
+                            score.setScore(score.getScore()-(cel.biome.multiplier*BombPunish*Bombs.indexOf(world.getType(bloc))));
                             Predicate<Player> nearPlayers = player -> (player.getLocation().distance(loc)<10);
                             world.spawnParticle(Particle.EXPLOSION_HUGE, loc,1);
                             world.playSound(loc.clone().add(0.5, 1.5, 0.5), Sound.ENTITY_GENERIC_EXPLODE, 1, 1);
@@ -244,10 +244,12 @@ public final class SweepLand extends JavaPlugin {
     }
 
     private static void CreateBiomes(){
-        BiomeList.add(new Biome("Vanilla", Material.WHITE_WOOL, Material.WHITE_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 19, false));
-        BiomeList.add(new Biome("Chocolate", Material.BROWN_WOOL, Material.BROWN_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 31, false));
-        BiomeList.add(new Biome("Mint", Material.GREEN_WOOL, Material.GREEN_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 19, true));
-        BiomeList.add(new Biome("BlueBerry", Material.LIGHT_BLUE_WOOL, Material.LIGHT_BLUE_TERRACOTTA, MinePlacement.Triple, NumberLogic.Normal, 19, false));
+        BiomeList.add(new Biome("Vanilla", Material.WHITE_WOOL, Material.WHITE_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 19, false, 1));
+        BiomeList.add(new Biome("Chocolate", Material.BROWN_WOOL, Material.BROWN_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 31, false, 2));
+        BiomeList.add(new Biome("Mint", Material.GREEN_WOOL, Material.GREEN_TERRACOTTA, MinePlacement.Single, NumberLogic.Normal, 19, true, 2));
+        BiomeList.add(new Biome("BlueBerry", Material.LIGHT_BLUE_WOOL, Material.LIGHT_BLUE_TERRACOTTA, MinePlacement.Triple, NumberLogic.Normal, 19, false,3));
+        BiomeList.add(new Biome("Water", Material.CYAN_WOOL, Material.CYAN_TERRACOTTA, MinePlacement.Double, NumberLogic.Normal, 19, false, 2));
+        BiomeList.add(new Biome("Chaos", Material.TNT, Material.BLACK_CONCRETE_POWDER, MinePlacement.Triple, NumberLogic.Normal, 25, true, 10));
 
 
 
